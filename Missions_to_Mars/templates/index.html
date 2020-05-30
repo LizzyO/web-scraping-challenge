@@ -12,16 +12,18 @@
 <body>
   <div class="container-fluid">
     <div class="jumbotron text-center">
-      <h1>Visit the...</h1>
-      <p>Beach. Rainforest. Volcano. Tree House. Sloths.</p>
-      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Get Data!</a></p>
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
     </div>
-    <img src="{{ vacation.sloth_img }}" alt="Sloth">
-    <h2>The typical weather in Costa Rica is:</h2>
-    <h3>Max Temp: {{ vacation.max_temp }}</h3>
-    <h3>Min Temp: {{ vacation.min_temp }}</h3>
+   <h3>Latest Mars News</h3>
+   <h2>{{mars_weather.news_title</h2>
+   <h1>{{mars_weather.news_title</h1>
+    
+    <h3>Featured Mars Image</h3>
+    <img src="{{ mars_weather.featured_image_url }}" alt="feature">
+
   </div>
-  </div>
+
 </body>
 
 </html>
