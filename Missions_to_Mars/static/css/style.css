@@ -1,3 +1,4 @@
-h1 {
-    color: blue;
-}
+.border {
+    border-style:solid;
+    border-color:#287EC7;
+   }

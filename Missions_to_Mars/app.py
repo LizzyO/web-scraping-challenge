@@ -14,8 +14,8 @@ mongo = PyMongo(app, uri="mongodb://localhost:27017/mars_app")
 def home():
 
     # Find one record of data from the mongo database
-    mars_data = mongo.db.collection.find_one()
-
+    mars_data = mongo.db.mars_data.find_one()
+    print(mars_data)
     # Return template and data
     return render_template("index.html", mars_weather=mars_data)
 
@@ -25,13 +25,14 @@ def home():
 def scrape():
 
     # Run the scrape function
-    mars_data = scrape_mars.scrape()
+    mars_data =  mongo.db.mars_data
+    mars_data_db = scrape_mars.scrape()
 
     # Update the Mongo database using update and upsert=True
-    mongo.db.collection.update({}, mars_data, upsert=True)
+    mars_data.update({}, mars_data_db, upsert=True)
 
     # Redirect back to home page
-    return redirect("/")
+    return redirect("/", code=302)
 
 
 if __name__ == "__main__":

@@ -19,7 +19,6 @@ def scrape():
     response = requests.get(url)
     time.sleep(1)
 
-
     # Create BeautifulSoup object; parse with 'html.parser'
     soup = BeautifulSoup(response.text, 'html.parser')
     results = soup.find('div', class_="slide")
@@ -30,8 +29,9 @@ def scrape():
     #get mars featured image
     url = 'https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars'
     browser.visit(url)
+    time.sleep(3)
     browser.click_link_by_id('full_image')
-
+    time.sleep(3)
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
 
@@ -95,13 +95,13 @@ def scrape():
     
     # Store data in a dictionary
     mars_data = {
-        "mars_title": news_title,
-        "mars_newsp": news_p,
-        "jpl_image_": featured_image_url,
-        "mars_weather": mars_weather_shrt,
-        "mars_facts": html_table,
-        "mars_hemispheres": hemisphere_image_urls
-    }
+    "mars_title": news_title,
+    "mars_newsp": news_p,
+    "jpl_image": featured_image_url,
+    "mars_weather": mars_weather_shrt,
+    "mars_facts": html_table,
+    "mars_hemispheres": hemisphere_image_urls
+     }
 
     # Close the browser after scraping
     browser.quit()
