@@ -37,19 +37,20 @@ def scrape():
 
     featured_image = soup.find('img', class_= "fancybox-image")
     featured_image_src = featured_image.get('src')
-    featured_image_url = "https://www.jpl.nasa.gov/spaceimages/?search=&category=Mars"+ featured_image_src
+    featured_image_url = "https://www.jpl.nasa.gov"+ featured_image_src
 
 
     # Mars weather
     url= "https://twitter.com/marswxreport?lang=en"
-    response = requests.get(url)
+    browser.visit(url)
     time.sleep(3)
 
-    soup = BeautifulSoup(response.text, 'html.parser')
+    html = browser.html
+    soup = BeautifulSoup(html, 'html.parser')
 
-    results = soup.find('div', class_="js-tweet-text-container")
-    mars_weather = results.find('p', class_="TweetTextSize").text
-    mars_weather_shrt = mars_weather[0:163]
+    results = soup.find('div', class_="css-1dbjc4n r-my5ep6 r-qklmqi r-1adg3ll")
+    results_filtered = results.find_all('span', class_="css-901oao css-16my406 r-1qd0xha r-ad9z0x r-bcqeeo r-qvutc0")
+    final_filter = results_filtered[4].text
 
     #Mars Facts
     url= "https://space-facts.com/mars/"
@@ -98,7 +99,7 @@ def scrape():
     "mars_title": news_title,
     "mars_newsp": news_p,
     "jpl_image": featured_image_url,
-    "mars_weather": mars_weather_shrt,
+    "mars_weather": final_filter,
     "mars_facts": html_table,
     "mars_hemispheres": hemisphere_image_urls
      }
